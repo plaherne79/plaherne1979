@@ -27,6 +27,22 @@
     .countdown {
       font-size: 1.2em;
       font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .progress-bar-container {
+      background-color: #ddd;
+      border-radius: 5px;
+      height: 20px;
+      width: 100%;
+      position: relative;
+      margin-top: 10px;
+    }
+    .progress-bar {
+      height: 100%;
+      background-color: #006400; /* Dark green */
+      border-radius: 5px;
+      width: 0%;
+      transition: width 0.5s ease;
     }
   </style>
 </head>
@@ -35,34 +51,54 @@
 <div class="container">
   <div class="header">Christmas Countdown</div>
   <div class="countdown" id="christmasCountdown">Loading...</div>
+  <div class="progress-bar-container">
+    <div class="progress-bar" id="christmasProgress"></div>
+  </div>
 </div>
 
 <div class="container">
   <div class="header">Countdown to The Bers</div>
   <div class="countdown" id="bersCountdown">Loading...</div>
+  <div class="progress-bar-container">
+    <div class="progress-bar" id="bersProgress"></div>
+  </div>
 </div>
 
 <script>
   function updateChristmasCountdown() {
     const now = new Date();
+    const startOfYear = new Date(now.getFullYear(), 0, 1); // January 1st
     const nextChristmas = new Date(now.getFullYear(), 11, 25); // December 25th
+
     if (now > nextChristmas) {
       nextChristmas.setFullYear(nextChristmas.getFullYear() + 1);
     }
+
     const timeRemaining = nextChristmas - now;
+    const totalTime = nextChristmas - startOfYear;
     const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+    const progressPercentage = ((totalTime - timeRemaining) / totalTime) * 100;
+
     document.getElementById('christmasCountdown').innerText = `${days} days until Christmas`;
+    document.getElementById('christmasProgress').style.width = `${progressPercentage}%`;
   }
 
   function updateBersCountdown() {
     const now = new Date();
+    const startOfBersCountdown = new Date(now.getFullYear(), 0, 1); // January 1st
     const nextBers = new Date(now.getFullYear(), 8, 1); // September 1st
+
     if (now > nextBers) {
       nextBers.setFullYear(nextBers.getFullYear() + 1);
     }
+
     const timeRemaining = nextBers - now;
+    const totalTime = nextBers - startOfBersCountdown;
     const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+    const progressPercentage = ((totalTime - timeRemaining) / totalTime) * 100;
+
     document.getElementById('bersCountdown').innerText = `${days} days until The Bers`;
+    document.getElementById('bersProgress').style.width = `${progressPercentage}%`;
   }
 
   // Initialize countdowns and update every second
