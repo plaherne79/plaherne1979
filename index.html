@@ -95,8 +95,8 @@
 <div class="container">
   <div class="header">Christmas Countdown</div>
   <div style="display: flex; justify-content: space-between;">
-    <span class="label">Dec 26th</span>
-    <span class="label">Dec 25th</span>
+    <span class="label">Sep 1st</span>
+    <span class="label">Aug 31st</span>
   </div>
   <div class="progress-bar-container">
     <div class="progress-bar" id="christmasProgress">0%</div>
@@ -139,12 +139,12 @@
 
   function updateChristmasCountdown() {
     const now = new Date();
-    const startOfCountdown = new Date(now.getFullYear() - 1, 11, 26); // December 26 of last year
-    const nextChristmas = new Date(now.getFullYear(), 11, 25); // December 25 of this year
+    const startOfCountdown = new Date(now.getFullYear(), 8, 1); // September 1st of this year
+    const nextChristmas = new Date(now.getFullYear() + 1, 7, 31); // August 31st of the following year
 
     if (now > nextChristmas) {
-      startOfCountdown.setFullYear(now.getFullYear());
-      nextChristmas.setFullYear(now.getFullYear() + 1);
+      startOfCountdown.setFullYear(now.getFullYear() + 1);
+      nextChristmas.setFullYear(now.getFullYear() + 2);
     }
 
     const timeRemaining = nextChristmas - now;
