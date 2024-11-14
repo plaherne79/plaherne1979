@@ -60,4 +60,17 @@
     if (now > nextBers) {
       nextBers.setFullYear(nextBers.getFullYear() + 1);
     }
-    const timeRem
+    const timeRemaining = nextBers - now;
+    const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+    document.getElementById('bersCountdown').innerText = `${days} days until The Bers`;
+  }
+
+  // Initialize countdowns and update every second
+  updateChristmasCountdown();
+  updateBersCountdown();
+  setInterval(updateChristmasCountdown, 1000);
+  setInterval(updateBersCountdown, 1000);
+</script>
+
+</body>
+</html>
